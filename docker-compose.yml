@@ -1,0 +1,22 @@
+version: '3'
+volumes:
+  pgdata:
+services:
+  python:
+    build:
+      context: .
+      dockerfile: docker/python/Dockerfile
+    volumes:
+      - ./father_app_v1:/father_app_v1
+    ports:
+      - 8000:8000
+  postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_USER: doker
+      POSTGRES_DB: doker
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
